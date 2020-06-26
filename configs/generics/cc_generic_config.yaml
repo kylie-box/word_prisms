@@ -1,0 +1,38 @@
+embedding:
+  exp_embs:
+  emb_dropout: 0.5
+  embeds_root: /home/jingyihe/scratch/wp/embeddings/
+  normalize: true
+  truncation: 50000
+  projection: true
+  proj_dim: 256
+
+evaluation:
+  dataset_dir: /home/jingyihe/scratch/wp/evaluation/
+  clf_dropout: 0.5
+  sentence_repr_lc: false
+  prism_level: system
+  max_pooling: true
+  rnn_dim: 256
+  rnn_dropout: 0.5
+  fc_dim: 512
+  task: sst2
+  hilbert: false
+  lstm_layers: 2
+
+checkpoint: None
+epoch: 100
+grad_clip: 5.0
+lr: 1.0e-3
+lr_min: 1.0e-7
+lr_shrink: 0.2
+max_epochs: 100
+mb_size: 64
+
+optimizer: adam
+output_dir: /home/jingyihe/scratch/wp/experiments
+seed: 616
+early_stop_patience: 10
+write_logger: true
+verbose: true
+cached: false

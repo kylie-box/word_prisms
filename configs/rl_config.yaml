@@ -1,0 +1,28 @@
+clf_dropout: 0.5
+dataset_dir: /home/rldata/word_prism/evaluation/
+early_stop_patience: 10
+embeds_root: /home/rldata/word_prism/embeddings
+epoch: 100
+exp_embs:
+- glove_cased
+fc_dim: 512
+grad_clip: 5.0
+hilbert: true
+lr: 0.01
+lr_min: 1.0e-7
+lr_shrink: 0.1
+lstm_layers: 2
+max_epochs: 100
+max_pooling: true
+mb_size: 64
+normalize: true
+optimizer: adam
+rnn_dim: 128
+rnn_dropout: 0.5
+savedir: /home/ml/jhe67/Documents/word_prism/experiments/
+seed: 616
+
+task: sst-imdb
+truncation: 50000
+write_logger: false
+verbose: true
