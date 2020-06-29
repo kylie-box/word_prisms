@@ -92,7 +92,7 @@ class Dictionary(object):
 
 
     def save(self):
-        if not os.path.exists(self.dict_path):
+        if not os.path.exists(os.path.split(self.dict_path)[0]):
             os.makedirs(os.path.split(self.dict_path)[0])
         with codecs.open(self.dict_path, 'w', 'utf8') as f:
             f.write('\n'.join(self.tokens))

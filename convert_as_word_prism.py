@@ -14,8 +14,10 @@ from pretrained embedding to the word prism form
 """
 
 
-def load_embeddings(emb_file):
-
+def load_embeddings(emb_dir):
+    emb_file = \
+            [f for f in os.listdir(emb_dir) if f.endswith('vec') or f.endswith('txt')][0]
+    emb_file = os.path.join(emb_dir, emb_file)
     print("Loading {}".format(emb_file))
     f = open(emb_file, 'r')
     num_lines = sum(1 for _ in f)
