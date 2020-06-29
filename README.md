@@ -28,16 +28,14 @@ If your embeddings are in GloVe format (a .txt file where each line consists of 
 
 Now, make a parent directory which contains each of the source embedding directories as a subdirectory. For example, you can have a directory called `facets`, which contains the subdirectories `fasttext` and `glove`.
 
+## Datasets
+
 ## Configurations
 
 In the `configs` folder, we include a .yaml file for each downstream evaluation (Semcor, WSJ, Brown, NER, SST2, SNLI). This sets all of the hyperparameters for the word prism model, including the source embeddings, the projection layer, orthogonality constraint, final dimension, and LSTM hyperparameters. All hyperparameters are set to the final setting for testing, but feel free to play around with them (and ask us if you have any questions).
 
-Next to `embeds_root`, write the parent directory containing all of your source embeddings. Under `exp_embs`, list the source embeddings inside the parent directory that you would like to include in your word prism.
+Next to `embeds_root`, write the path to the parent directory containing all of your source embeddings. Under `exp_embs`, list the source embeddings inside the parent directory that you would like to include in your word prism. Next to `dataset_dir`, write the path to the parent directory which contains the downstream evaluation data. Next to `output_dir`, write the path to the directory where you would like the results of the experiment to be outputted.
 
 ## Running Word Prisms
 
 Now that everything is set up, you can run finally run word prisms! To run a sequence labelling task (Semcor, WSJ, Brown, NER), run the following command `python train_sequence_labelling.py -c [Path to config file corresponding to the downstream task you are running on]`. To run a classification task (SST2, SNLI), run the following command `python train_text_classification.py -c [Path to config file corresponding to the downstream task you are running on]`. 
-
-## Contact
-
-Please reach out to Jingyi (Kylie) He (jingyi.he@mail.mcgill.ca) and/or Konstantinos Christopher (KC) Tsiolis (kc.tsiolis@mail.mcgill.ca) for any questions regarding this repository.

@@ -200,7 +200,7 @@ def train(model, loaders, logger, args, sst_labels=None):
                                                           model.saved_weights.tolist()))
             monitor_word_wp_id = model.encoder.wp.get_id(args.evaluation.monitor_word)
             if not args.evaluation.cdme:
-                logger.info('monitoring word attention weights\n -{}- : {} -- {}'.format(args.evaluation.monitor_word, system_names,
+                logger.info('monitoring facet-level importance weights\n -{}- : {} -- {}'.format(args.evaluation.monitor_word, system_names,
                                                                                      model.get_weights(torch.LongTensor([[monitor_word_wp_id]])).tolist()
                                                                                      ))
 
