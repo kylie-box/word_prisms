@@ -14,7 +14,6 @@ from evaluation.results import ResultsHolder
 from evaluation_models import TextClassificationModel, SeqLabModel, NLIModel
 from load_as_word_prism import load_word_prism
 from logger import create_logger
-from sklearn.model_selection import train_test_split
 from utils import count_param_num
 
 
@@ -38,7 +37,7 @@ def get_optimizer_scheduler(args, nn_module):
     if args.optimizer == 'adam':
         optimizer = torch.optim.Adam(nn_params, lr=args.lr)
         scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-            optimizer, factor=args.lr_shrink, patience=args.early_stop_patience,
+            optimizer, factor=args.lr_shrink, patience=args.early_stop_patience // 5,
             mode='max',
             min_lr=args.lr_min, verbose=True)
 

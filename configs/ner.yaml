@@ -1,19 +1,22 @@
 embedding:
   exp_embs:
-          - List your source embeddings (i.e. facets) here
+          - # List your source embeddings (i.e. facets) here
   emb_dropout: 0.5
-  embeds_root: Write the path to parent directory of your source embeddings here
-  normalize: false  # fixed
-  zero_mean: false
+  embeds_root: # Write the path to parent directory of your source embeddings here
+  normalize: false
   truncation: -1
-  projection: true   # fixed
-  proj_dim: 300
+  projection: true
+  zero_mean: false
+  proj_dim: 256
+  projection_normalization: false
   nonlinear: true
-  projection_normalization: False # normalize projected embeddings
 
 evaluation:
-  dataset_dir: Write the path to the parent directory of the datasets here
-  prism_level: system   # choices: system, word, contextualized
+  dataset_dir: # Write the path to the parent directory of the datasets here
+  clf_dropout: 0.5
+  sentence_repr_lc: false
+  max_pooling: true
+  prism_level: system
   average_baseline: false
   concat_baseline: false
   parameterization_type: None
@@ -21,9 +24,6 @@ evaluation:
   proj_lambda: 0
   orthogonal: true
   beta: 0.001
-  clf_dropout: 0.5
-  sentence_repr_lc: false   # ignore
-  max_pooling: true
   rnn_dim: 256
   rnn_dropout: 0.5
   fc_dim: 512
@@ -39,12 +39,12 @@ epoch: 100
 grad_clip: 5.0
 lr: 1.0e-3
 lr_min: 1.0e-7
-lr_shrink: 0.1
+lr_shrink: 0.2
 max_epochs: 100
 mb_size: 16
 
 optimizer: adam
-output_dir: Write the path to desired output location
+output_dir: # Write the path to desired output location
 seed: 2020
 early_stop_patience: 10
 write_logger: true

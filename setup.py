@@ -7,8 +7,6 @@ setup(
     name='word_prism',
     version='0.0.1',
     description='word prism project',
-    author='Jingyi(Kylie) He',
-    author_email='kyliehe616@gmail.com',
     license='MIT',
     classifiers=[
         'Development Status :: 3 - Alpha',

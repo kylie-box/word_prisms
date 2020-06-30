@@ -8,6 +8,7 @@ import utils
 from dictionary import Dictionary
 from sklearn.decomposition import PCA
 from torch import nn
+from utils import nn_init
 
 
 class Embeddings:
@@ -20,6 +21,7 @@ class Embeddings:
                  system_name=None,
                  truncation=None,
                  normalize=False,
+                 zero_mean=False
                  ):
         self.device = utils.get_device(device)
         self.dtype = utils.get_dtype()
@@ -47,6 +49,9 @@ class Embeddings:
         self.normalized = False
         if normalize:
             _V = self.normalize(_V)
+
+        if zero_mean:
+            _V = _V - _V.mean(0)
 
         # final check
         self.validate(_V)
@@ -90,12 +95,15 @@ class Embeddings:
         V_normed = torch.allclose(utils.norm(_V[:-1], axis=1), ones)
         self.normalized = V_normed
 
-    def normalize(self, _V):
+    def normalize(self, _V, zero_mean=False):
         """
+        two ways of normalizing: 1) vector norm to be 1. 2) each facet center at mean zero
         Normalize the vectors if they aren't already normed.
         """
-
-        return self._normalize(_V)
+        if zero_mean:
+            return _V - _V.mean(0)
+        else:
+            return self._normalize(_V)
 
     def _normalize(self, _V):
         """
@@ -105,8 +113,10 @@ class Embeddings:
         self.normalized = True
         return _V
 
+
     @staticmethod
-    def load_embedding(path, truncation, normalize=False, device=None, random_cnt=0):
+    def load_embedding(path, truncation, normalize=False, zero_mean=False,
+                       device=None, random_cnt=0):
         """
         Static method for loading embeddings stored at ``path``.
 
@@ -131,7 +141,8 @@ class Embeddings:
 
         return Embeddings(
             V, bias=bias, device=device, dictionary=dictionary,
-            system_name=system_name, truncation=truncation, normalize=normalize
+            system_name=system_name, truncation=truncation, normalize=normalize,
+            zero_mean=zero_mean
         )
 
     @staticmethod
@@ -393,6 +404,7 @@ class EmbeddingModel(nn.Module):
                 self.projectors.update({facet.system_name:
                     nn.Linear(facet.dim,self.emb_dim).to(
                     self.device)})
+                nn_init(self.projectors[facet.system_name], 'xavier')
         self.projection_normalization = projection_normalization
 
     def mapping_index(self, indices):

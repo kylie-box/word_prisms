@@ -71,7 +71,7 @@ class SysLvlLC(nn.Module):
 
 
 class WordLvlLC(nn.Module):
-    def __init__(self, emb_dim, emb_dropout=0.0, nonlinear=False, cdme=False):
+    def __init__(self, emb_dim, emb_dropout=0, cdme=False, nonlinear=True):
         super(WordLvlLC, self).__init__()
         self.device = utils.get_device()
         self.cdme = cdme
@@ -240,15 +240,17 @@ class BaseEvaluationModel(nn.Module):
                                       hidden_size=eval_args.rnn_dim,
                                       num_layers=eval_args.lstm_layers,
                                       batch_first=True,
-                                      bidirectional=True)})
+                                      bidirectional=True,
+                                      dropout=eval_args.rnn_dropout)})
             else:
                 self.lstm.update(
                     {'prism': nn.LSTM(input_size=word_prism_model.emb_dim * self.encoder.wp.num_facets,
                                       hidden_size=eval_args.rnn_dim,
                                       num_layers=eval_args.lstm_layers,
                                       batch_first=True,
-                                      bidirectional=True)})
-            nn_init(self.lstm['prism'], 'orthogonal')
+                                      bidirectional=True,
+                                      dropout=eval_args.rnn_dropout)})
+                nn_init(self.lstm, 'orthogonal')
 
         self.hidden = None
         self.n_layers = eval_args.lstm_layers
@@ -325,7 +327,7 @@ class TextClassificationModel(BaseEvaluationModel):
 
     def get_classifier(self):
         if self.args.hilbert:
-            # as in Hilbert, ffnn option True
+            # as in Hilbert
             return nn.Sequential(
                 nn.Dropout(p=self.args.clf_dropout),
                 nn.Linear(2 * self.args.rnn_dim, self.args.fc_dim),

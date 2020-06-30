@@ -30,6 +30,31 @@ Now, make a parent directory which contains each of the source embedding directo
 
 ## Datasets
 
+All datasets would be saved in a single directory named `sup_dataset`. 
+The structure of the directory is:
+./sup_dataset
++-- semcor-sst.txt
++-- conll2003
+|    +-- ner_train.txt
+|    +-- ner_valid.txt
+|    +-- ner_test.txt
++-- sst2
+|    +-- sentiment-train.jsonl
+|    +-- sentiment-dev.jsonl
+|    +-- sentiment-test.jsonl
++-- snli
+|    +-- snli_1.0_train.jsonl 
+|    +-- snli_1.0_dev.jsonl 
+|    +-- snli_1.0_test.jsonl 
+
+To retrieve:
+* Semcor-sst: available upon request
+* conll2003(NER): download from https://www.clips.uantwerpen.be/conll2003/ner/
+* wsj: Wall Street Journal (WSJ) release 3 (LDC99T42). Use sections 22-24 as test set.
+* brown: Retrieve from http://www.nltk.org/nltk_data/
+* sst2: download from https://raw.githubusercontent.com/PrincetonML/SIF/master/data/sentiment-{train,dev,test}
+* snli: retrieve from torchtext.datasets.SNLI
+
 ## Configurations
 
 In the `configs` folder, we include a .yaml file for each downstream evaluation (Semcor, WSJ, Brown, NER, SST2, SNLI). This sets all of the hyperparameters for the word prism model, including the source embeddings, the projection layer, orthogonality constraint, final dimension, and LSTM hyperparameters. All hyperparameters are set to the final setting for testing, but feel free to play around with them (and ask us if you have any questions).

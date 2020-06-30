@@ -46,7 +46,7 @@ def load_word_prism(args, logger=None):
         for random_cnt in range(0, random_embs_num):
             embeddings = Embeddings.load_embedding(
                 os.path.join(args.embeds_root, 'win1'), -1, device=device,
-                random_cnt=True)
+                random_cnt=random_cnt)
             dictionary = embeddings.dictionary
             emb_wrap = load_embwrapper(embeddings, dictionary, system_name="random{}".format(random_cnt + 1))
             emb_wraps.append(emb_wrap)
@@ -77,9 +77,3 @@ def load_word_prism(args, logger=None):
         "word prism dictionary size {}".format(len(wp.dictionary)))
     return wp
 
-
-if __name__ == '__main__':
-    logger = create_logger(os.path.join(os.getcwd(), 'logger.txt'))
-    root_dir = "/home/jingyihe/projects/def-dprecup/jingyihe/" \
-               "files/embeddings/test_prism_embs"
-    load_word_prism(root_dir, logger)
