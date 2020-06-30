@@ -31,7 +31,9 @@ Now, make a parent directory which contains each of the source embedding directo
 ## Datasets
 
 All datasets would be saved in a single directory named `sup_dataset`. 
+
 The structure of the directory is:
+```
 ./sup_dataset
 +-- semcor-sst.txt
 +-- conll2003
@@ -46,14 +48,15 @@ The structure of the directory is:
 |    +-- snli_1.0_train.jsonl 
 |    +-- snli_1.0_dev.jsonl 
 |    +-- snli_1.0_test.jsonl 
+```
 
 To retrieve:
-* Semcor-sst: available upon request
-* conll2003(NER): download from https://www.clips.uantwerpen.be/conll2003/ner/
+* Semcor-sst: Available upon request
+* conll2003(NER): Download from https://www.clips.uantwerpen.be/conll2003/ner/
 * wsj: Wall Street Journal (WSJ) release 3 (LDC99T42). Use sections 22-24 as test set.
 * brown: Retrieve from http://www.nltk.org/nltk_data/
-* sst2: download from https://raw.githubusercontent.com/PrincetonML/SIF/master/data/sentiment-{train,dev,test}
-* snli: retrieve from torchtext.datasets.SNLI
+* sst2: Download from https://raw.githubusercontent.com/PrincetonML/SIF/master/data/sentiment-{train,dev,test}
+* snli: Retrieve from torchtext.datasets.SNLI
 
 ## Configurations
 
